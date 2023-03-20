@@ -1,13 +1,14 @@
-const nameElem = document.getElementById("name");
-const pokemonImage = document.getElementById('pokemon')
-const heightElem = document.getElementById("height");
-const weightElem = document.getElementById("weight");
 const button = document.querySelector(".button");
 
 button.addEventListener('click', (e) => {
   e.preventDefault()
-  const randomNumber = Math.ceil(Math.random() * 905)
-  fetch(`https://pokeapi.co/api/v2/pokemon/${randomNumber}/`)
+  for (let i = 0; i < 6; i++) {
+    const randomNumber = Math.ceil(Math.random() * 905)
+    const nameElem = document.getElementById("name-" + i);
+    const pokemonImage = document.getElementById('pokemon-' + i)
+    const heightElem = document.getElementById("height-" + i);
+    const weightElem = document.getElementById("weight-" + i);
+    fetch(`https://pokeapi.co/api/v2/pokemon/${randomNumber}/`)
     .then(response => response.json())
     .then(pokemon => {
       const {
@@ -22,4 +23,5 @@ button.addEventListener('click', (e) => {
       weightElem.innerHTML = weight;
       pokemonImage.setAttribute('src', sprites.front_default);
     })
+  }
 })
